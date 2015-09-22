@@ -19,13 +19,24 @@ public class CrosshairController : MonoBehaviour
     {
         var accelDiff = callibration - Input.acceleration;
 
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            accelDiff = (Input.mousePosition - new Vector3(Screen.width/2f, Screen.height/2f));
+            accelDiff.Scale(new Vector3(1f/Screen.width, 1f/Screen.height));
+        }
+
         transform.Translate(accelDiff.x, accelDiff.y, 0);
 
-        if (Input.touchCount == 1)
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             // todo: ammo
 
-            gameMgr.RegisterShot(Input.GetTouch(0).position);
+            gameMgr.RegisterShot(transform.position);
+        }
+
+        if (Application.platform == RuntimePlatform.WindowsEditor && Input.GetMouseButtonDown(0))
+        {
+            gameMgr.RegisterShot(transform.position);
         }
 
         // keep crosshairs in bounds
