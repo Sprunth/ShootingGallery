@@ -15,6 +15,7 @@ public class Target : MonoBehaviour
     private SpriteRenderer renderer;
     protected Sprite backSprite;
 
+
     // Use this for initialization
     public virtual void Start()
     {
@@ -48,6 +49,9 @@ public class Target : MonoBehaviour
 
     public virtual void OnSpinFinish()
     {
-        
+        var parentStick = GetComponentInParent<Stick>();
+        Assert.IsNotNull(parentStick);
+
+        parentStick.StartDropping();
     }
 }

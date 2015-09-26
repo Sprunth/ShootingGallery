@@ -18,8 +18,8 @@ public class BulletHoleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        const float timeBeforeFade = 5;
-        const float fadeDuration = 2;
+        const float timeBeforeFade = 0.3f;
+        const float fadeDuration = 0.2f;
 
         var timeSinceSpawned = Time.time - startingTime;
 
